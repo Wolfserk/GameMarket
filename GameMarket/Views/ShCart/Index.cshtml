@@ -1,0 +1,90 @@
+﻿@model GameMarket.ViewModels.ShoppingCartViewModel
+@{
+    ViewBag.Title = "Корзина";
+}
+
+@section Scripts {
+    <script type="text/javascript">
+        $(function () {
+            // Document.ready -> link up remove event handler
+            $(".RemoveLink").click(function () {
+                // Get the id from the link
+                var recordToDelete = $(this).attr("data-id");
+                var PostToUrl = $(this).attr("data-url");
+                if (recordToDelete != '') {
+
+                    // Perform the ajax post
+                    $.post(PostToUrl, { "id": recordToDelete },
+                        function (data) {
+                            // Successful requests get here
+                            // Update the page elements
+                            if (data.ItemCount == 0) {
+                                $('#row-' + data.DeleteId).fadeOut('slow');
+                            } else {
+                                $('#item-count-' + data.DeleteId).text(data.ItemCount);
+                            }
+
+                            $('#cart-total').text(data.CartTotal);
+                            $('#update-message').text(data.Message);
+                            $('#cart-status').text('Корзина (' + data.CartCount + ')');
+                        });
+                }
+            });
+
+        });
+    </script>
+}
+
+<h3>
+    <em>Просмотр корзины</em> :
+</h3>
+<p class="button">
+    @Html.ActionLink("Оплатить", "AddressAndPayment", "Checkout")
+</p>
+<div id="update-message">
+</div>
+<table id="cart-summary">
+    <tr>
+        <th>
+           Название игры
+        </th>
+        <th>
+            Цена(за штуку)
+        </th>
+        <th>
+            Количество
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model.CartItems)
+    {
+        <tr id="row-@item.NoteId">
+            <td>
+                @Html.ActionLink(item.Game.Name,
+                 "Details", "Store", new { id = item.GameId }, null)
+            </td>
+            <td>
+                @item.Game.Price
+            </td>
+            <td id="item-count-@item.NoteId">
+                @item.Count
+            </td>
+            <td>
+                <a href="#" class="RemoveLink" data-id="@item.NoteId"
+                   data-url='@Url.Content("~/ShCart/RemoveFromCart")'>
+                    Удалить из корзины
+                </a>
+            </td>
+        </tr>
+    }
+    <tr>
+        <td>
+            Итог
+        </td>
+        <td></td>
+        <td></td>
+        <td id="cart-total">
+            @Model.CartTotal
+        </td>
+    </tr>
+</table>

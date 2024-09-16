@@ -1,0 +1,37 @@
+﻿@model GameMarket.Models.Game
+
+@{
+    ViewBag.Title = "Game - " + Model.Name;
+}
+
+<h3>@Model.Name</h3>
+
+<p>
+    <img alt="@Model.Name" style="" src="@Url.Content(@Model.GameImgUrl)" />
+</p>
+
+<div id="flower-details">
+    <p>
+        <b>Жанр:</b>
+        @Model.Genre.Name
+    </p>
+    <p>
+        <b>Цена:</b>
+        @Html.DisplayFor(model => model.Price)
+    </p>
+    <p>
+        <b>Об игре:</b></br>
+        @Html.DisplayFor(model => model.About)
+    </p>
+    <p>
+        <b>Системные требования:</b></br>
+        @Html.DisplayFor(model => model.SysRec)
+    </p>
+    <p>
+        <b>Производитель:</b>
+        @Html.DisplayFor(model => model.Author)
+    </p>
+    <p class="buttonforop">
+        @Html.ActionLink("В корзину", "AddToCart","ShCart", new { id = Model.GameId},"")
+    </p>
+</div>

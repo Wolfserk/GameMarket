@@ -1,0 +1,32 @@
+﻿@model GameMarket.Models.Genre
+@{
+    ViewBag.Title = Model.Name;
+}
+<div class="grade">
+    <h3>
+        @Model.Name:
+    </h3>
+
+        @foreach (var game in Model.Games)
+        {
+            <table>
+            <tr>
+@if (!string.IsNullOrEmpty(game.GameImgUrl))
+                    {
+                <td style="width: 170px; height: 200px; text-align: center;" rowspan="3"><img style='width:170px; height:200px;' src="@Url.Content(@game.GameImgUrl)"></td>
+                    }
+                <td style="width: 400px; height: 30px; text-align: center; font-weight: bold;" colspan="2">@game.Name</td>
+                <td style="width: 50px; height: 30px; text-align: center; background: #363636; color: white; ">@game.Price руб.</td>
+            </tr>
+            <tr>
+                <td style="width: 450px; height: 50px;" colspan="3">@game.About</td>
+            </tr>
+            <tr>     
+                <td style="width: 150px; height: 30px; text-align: center;"><a href="@Url.Action("Details", new { id = game.GameId})">Подробнее...</a></td>           
+                <td style="width: 150px; height: 30px; text-align: center;">@Html.ActionLink("В корзину", "AddToCart","ShCart", new { id = game.GameId }, "")</td>
+                <td style="width: 150px; height: 30px; text-align: center;">Жанр:@game.Genre.Name</td>
+            </tr>
+            <tr><td colspan="4"><div style="height: 1px; -webkit-box-shadow: 0 0 7px black;-box-shadow: 0 0 7px black;"></div></td></tr>                        
+        </table>
+        }
+</div>

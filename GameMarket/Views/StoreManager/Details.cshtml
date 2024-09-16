@@ -1,0 +1,63 @@
+﻿@model GameMarket.Models.Game
+
+@{
+    ViewBag.Title = "Подробно";
+}
+
+<h2>Подробно</h2>
+
+<fieldset>
+    <legend>Game</legend>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Genre.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Genre.Name)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Price)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Price)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.GameImgUrl)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.GameImgUrl)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.About)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.About)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Author)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Author)
+    </div>
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.SysRec)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SysRec)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Редактировать", "Edit", new { id = Model.GameId }) |
+    @Html.ActionLink("Назад к списку", "Index")
+</p>

@@ -1,0 +1,33 @@
+﻿@model GameMarket.Models.Order
+
+@{
+    ViewBag.Title = "Заказ";
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+@using (Html.BeginForm())
+{
+
+    <h2>Заполните форму для заказа:</h2>
+    <fieldset>
+        <legend>Информация</legend>
+
+        @Html.EditorForModel()
+    </fieldset>
+    <fieldset>
+        <legend>Payment</legend>
+        <p>Для окончания оформления заказа введите: "FREE"</p>
+
+        <div class="editor-label">
+            @Html.Label("Promo Code")
+        </div>
+        <div class="editor-field">
+            @Html.TextBox("PromoCode")
+        </div>
+    </fieldset>
+
+    <input type="submit" value="Оформить заказ" />
+}

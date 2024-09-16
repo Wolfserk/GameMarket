@@ -1,0 +1,87 @@
+﻿@model GameMarket.Models.Game
+
+@{
+    ViewBag.Name = "Редактировать";
+}
+
+<h2>Редактирование:</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Game</legend>
+
+        @Html.HiddenFor(model => model.GameId)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.GenreId, "Жанр")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("GenreId", String.Empty)
+            @Html.ValidationMessageFor(model => model.GenreId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Price)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Price)
+            @Html.ValidationMessageFor(model => model.Price)
+        </div>
+
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SysRec)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SysRec)
+            @Html.ValidationMessageFor(model => model.SysRec)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.About)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.About)
+            @Html.ValidationMessageFor(model => model.About)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Author)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Author)
+            @Html.ValidationMessageFor(model => model.Author)
+        </div>
+        
+        <div class="editor-label">
+            @Html.LabelFor(model => model.GameImgUrl)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.GameImgUrl)
+            @Html.ValidationMessageFor(model => model.GameImgUrl)
+        </div>
+       
+        <p>
+            <input type="submit" value="Сохранить" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Назад к списку", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

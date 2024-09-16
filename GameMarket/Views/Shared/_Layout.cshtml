@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <style type="text/css">
+        BODY {
+            margin: 0; /* Убираем отступы в браузере */
+        }
+
+        #toplayer {
+            background: url(images/bg.png) repeat-x; /* Параметры фона */
+            height: 69px; /* Высота слоя */
+            border-bottom: 2px solid maroon; /* Параметры линии внизу */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="wrapper">
+            <div class="float-left">
+                <p>LowPriceGames</p>
+            </div>
+            <div class="float-left">                
+                    <ul>
+                        <li>@Html.ActionLink("Главная", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Контактные данные", "Contact", "Home")</li>                        
+                        @Html.Action("CartSummary", "ShCart")
+                        @if (User.IsInRole("Administrator")) { 
+                        <li>@Html.ActionLink("Управление", "ADM", "Home")</li>}
+                    </ul>               
+            </div>
+            <div class="float-right">
+                <section id="login">
+                    @Html.Partial("_LoginPartial")
+                </section>
+                </div>            
+        </div>
+    </header>
+    <div class="greatblock">
+
+        <div class="leftblock">@Html.Action("GradeMenu", "Store")
+             @RenderSection("featured", required: false)
+        </div>
+        <div class="centerinfo">
+            <!--<section class="content-wrapper main-content clear-fix">
+                          </section>-->
+            @RenderBody()
+
+
+        </div>
+        <div class="downblock"></div>
+            </div>
+    
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

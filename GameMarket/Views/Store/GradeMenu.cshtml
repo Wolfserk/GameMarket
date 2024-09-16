@@ -1,0 +1,16 @@
+﻿@model IEnumerable<GameMarket.Models.Genre>
+
+    <nav id="categories">
+        <ul class="sideblockul">
+            @foreach (var genre in Model)
+            {
+                <li class="menu">
+                    <ul>
+                        <li class="dropul buttonforop">
+                            @Html.ActionLink(genre.Name, "Browse", "Store", new { genre = genre.Name}, null)
+                        </li>
+                    </ul>
+                </li>     
+            }
+        </ul>
+    </nav>
